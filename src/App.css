@@ -1,6 +1,34 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+}
+
+body {
+  margin: 0;
+  width: 1200 px;
+  /* min-height: 100vh; */
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+label {
+  margin: 0;
+}
+
+p {
+  overflow-wrap: anywhere;
+  margin: 0;
+}
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+a,
+button {
+  text-decoration: none;
 }

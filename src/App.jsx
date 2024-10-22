@@ -33,7 +33,15 @@ function App() {
       {error && <p>Error in app</p>}
       <div>
         {places.length > 0 &&
-          places.map((item) => <p key={item.id}>{item.name}</p>)}
+          places.map((item) => (
+            <ul key={item._id}>
+              <li>
+                <p>
+                  {item.name} - {item.location.city} - {item.location.country}
+                </p>
+              </li>
+            </ul>
+          ))}
       </div>
     </>
   );
