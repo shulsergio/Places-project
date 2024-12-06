@@ -1,4 +1,4 @@
-import { logIn, logOut, register } from "./operations.js";
+import { logIn, logOut, refreshUser, register } from "./operations.js";
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
@@ -29,6 +29,11 @@ const authSlice = createSlice({
         console.log(state.user);
         console.log("state.isLoggedIn in slice.js: ");
         console.log(state.isLoggedIn);
+      })
+      .addCase(refreshUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isRefreshing = false;
+        state.isLoggedIn = true;
       })
       .addCase(logOut.fulfilled, () => {
         return {

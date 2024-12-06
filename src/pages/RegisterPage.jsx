@@ -1,6 +1,10 @@
-import LoginForm from "../../components/LoginForm/LoginForm";
+import RegisterForm from "../components/RegisterForm/RegisterForm";
 
-export default function LoginPage() {
-  console.log("Rendered LoginPage");
-  return <LoginForm />;
+export default function RegistrationPage() {
+  console.log("Rendered RegistrationPage");
+  return (
+    <>
+      <RegisterForm />
+    </>
+  );
 }

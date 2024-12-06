@@ -1,48 +1,64 @@
-import { useState } from "react";
+import { lazy, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
-import { useEffect } from "react";
-import { fetchPlaces } from "./components/service/Api";
+// import { fetchPlaces } from "./components/service/Api";
 import Loader from "./components/Loader/Loader";
+import { Toaster } from "react-hot-toast";
+import Layout from "./Layout/Layout";
+import { Route, Routes } from "react-router-dom";
+import { RestrictedRoute } from "./components/RestrictedRoute/RestrictedRoute";
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
+import { selectIsLoggedIn, selectIsRefreshing } from "./redux/auth/selectors";
+import { refreshUser } from "./redux/auth/operations";
 
 function App() {
-  const [places, setPlaces] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const HomePage = lazy(() => import("./pages/HomePage"));
+  const LoginPage = lazy(() => import("./pages/LoginPage"));
+  const RegisterPage = lazy(() => import("./pages/RegisterPage"));
+  const VisitsPage = lazy(() => import("./pages/VisitsPage"));
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  console.log("isLoggedIn in App component:", isLoggedIn);
+  const dispatch = useDispatch();
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const { data } = await fetchPlaces();
-        console.log("data 1:");
-        console.log(data);
-        setPlaces(data);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  return (
+    dispatch(refreshUser());
+  }, [dispatch]);
+  const isRefreshing = useSelector(selectIsRefreshing);
+  return isRefreshing ? (
+    <Loader />
+  ) : (
     <>
-      <h1>Places project</h1>
-      {loading && <Loader />}
-      {error && <p>Error in app</p>}
+      <Toaster position="top-center" />
+      <Layout>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
 
-      <div>
-        {places.length > 0 && (
-          <ul>
-            {places.map((city, index) => (
-              <li key={index}>
-                <p>{city}</p>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<RegisterPage />}
+              />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute
+                component={<LoginPage />}
+                redirectTo="/contacts"
+              />
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<VisitsPage />} />
+            }
+          />
+        </Routes>
+      </Layout>
     </>
   );
 }
