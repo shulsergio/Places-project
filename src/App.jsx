@@ -31,17 +31,17 @@ function App() {
       <h1>Places project</h1>
       {loading && <Loader />}
       {error && <p>Error in app</p>}
+
       <div>
-        {places.length > 0 &&
-          places.map((item) => (
-            <ul key={item._id}>
-              <li>
-                <p>
-                  {item.name} - {item.location.city} - {item.location.country}
-                </p>
+        {places.length > 0 && (
+          <ul>
+            {places.map((city, index) => (
+              <li key={index}>
+                <p>{city}</p>
               </li>
-            </ul>
-          ))}
+            ))}
+          </ul>
+        )}
       </div>
     </>
   );
