@@ -22,13 +22,16 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(logIn.fulfilled, (state, action) => {
+        console.log("Action payload in logIn.fulfilled:", action.payload);
+        if (!action.payload || !action.payload.user) {
+          console.error("Invalid payload in logIn.fulfilled:", action.payload);
+          return;
+        }
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
-        console.log("state.user in slice.js: ");
-        console.log(state.user);
-        console.log("state.isLoggedIn in slice.js: ");
-        console.log(state.isLoggedIn);
+        console.log("Updated state.user:", state.user);
+        console.log("Updated state.isLoggedIn:", state.isLoggedIn);
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.user = action.payload;

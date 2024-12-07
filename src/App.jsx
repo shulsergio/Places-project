@@ -8,6 +8,7 @@ import Layout from "./Layout/Layout";
 import { Route, Routes } from "react-router-dom";
 import { RestrictedRoute } from "./components/RestrictedRoute/RestrictedRoute";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
+
 import { selectIsLoggedIn, selectIsRefreshing } from "./redux/auth/selectors";
 import { refreshUser } from "./redux/auth/operations";
 
@@ -37,7 +38,7 @@ function App() {
             path="/register"
             element={
               <RestrictedRoute
-                redirectTo="/contacts"
+                redirectTo="/visits"
                 component={<RegisterPage />}
               />
             }
@@ -45,14 +46,11 @@ function App() {
           <Route
             path="/login"
             element={
-              <RestrictedRoute
-                component={<LoginPage />}
-                redirectTo="/contacts"
-              />
+              <RestrictedRoute component={<LoginPage />} redirectTo="/visits" />
             }
           />
           <Route
-            path="/contacts"
+            path="/visits"
             element={
               <PrivateRoute redirectTo="/login" component={<VisitsPage />} />
             }

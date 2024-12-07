@@ -2,7 +2,6 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = "https://places-project-db.onrender.com/";
-
 const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
@@ -30,7 +29,10 @@ export const logIn = createAsyncThunk(
       const { data } = await axios.post("/auth/login", credential);
       console.log("auth/login (opration.js) - in data:", data);
       setAuthHeader(data.token);
-      return data;
+      return {
+        user: data.data.user, // Путь к объекту user
+        token: data.data.accessToken, // Путь к токену
+      };
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -51,7 +53,7 @@ export const refreshUser = createAsyncThunk(
   async (_, thunkAPI) => {
     const reduxState = thunkAPI.getState();
     setAuthHeader(reduxState.auth.token);
-    const { data } = await axios.get("/users/current");
+    const { data } = await axios.get("/auth/refresh");
     return data;
   },
   {
