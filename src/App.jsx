@@ -4,13 +4,13 @@ import "./App.css";
 // import { fetchPlaces } from "./components/service/Api";
 import Loader from "./components/Loader/Loader";
 import { Toaster } from "react-hot-toast";
-import Layout from "./Layout/Layout";
+import Layout from "./components/Layout/Layout";
 import { Route, Routes } from "react-router-dom";
 import { RestrictedRoute } from "./components/RestrictedRoute/RestrictedRoute";
-import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
-
 import { selectIsLoggedIn, selectIsRefreshing } from "./redux/auth/selectors";
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 import { refreshUser } from "./redux/auth/operations";
+// import VisitsPage from "./pages/VisitsPage";
 
 function App() {
   const HomePage = lazy(() => import("./pages/HomePage"));
@@ -22,8 +22,10 @@ function App() {
   console.log("isLoggedIn in App component:", isLoggedIn);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(refreshUser());
-  }, [dispatch]);
+    if (!isLoggedIn) {
+      dispatch(refreshUser());
+    }
+  }, [dispatch, isLoggedIn]);
   const isRefreshing = useSelector(selectIsRefreshing);
   return isRefreshing ? (
     <Loader />
@@ -46,7 +48,7 @@ function App() {
           <Route
             path="/login"
             element={
-              <RestrictedRoute component={<LoginPage />} redirectTo="/visits" />
+              <RestrictedRoute redirectTo="/visits" component={<LoginPage />} />
             }
           />
           <Route

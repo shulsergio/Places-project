@@ -3,16 +3,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchVisits } from "../redux/visits/operations";
 import Loader from "../components/Loader/Loader";
 import VisitList from "../components/VisitList/VisitList";
+import { selectIsLoading } from "../redux/visits/selectors";
 // import VisitForm from "../components/VisitForm/VisitForm";
 
 export default function VisitPage() {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.visits.loading);
-  //   const error = useSelector((state) => state.visits.error);
 
   useEffect(() => {
     dispatch(fetchVisits());
   }, [dispatch]);
+  const loading = useSelector(selectIsLoading);
+  const visits = useSelector((state) => state.visits.items);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (visits.length === 0) {
+    return <div>No visits found</div>;
+  }
 
   return (
     <>
@@ -24,3 +33,7 @@ export default function VisitPage() {
     </>
   );
 }
+
+// export default function VisitsPage() {
+//   return <h1>Visits Page</h1>;
+// }
