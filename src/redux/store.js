@@ -1,8 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-// import { visitsReducer } from "./visits/slice";
-// import { filtersReducer } from "./filters/slice";
-
 import {
   persistStore,
   persistReducer,
@@ -15,7 +12,8 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import authReducer from "./auth/slice";
-
+import { visitsReducer } from "./visits/slice";
+// import { filtersReducer } from "./filters/slice";
 const persistedAuthReducer = persistReducer(
   {
     key: "root",
@@ -27,9 +25,9 @@ const persistedAuthReducer = persistReducer(
 
 export const store = configureStore({
   reducer: {
-    // visits: visitsReducer,
-    // filters: filtersReducer,
     auth: persistedAuthReducer,
+    visits: visitsReducer,
+    // filters: filtersReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -3,12 +3,16 @@ import css from "./LoginForm.module.css";
 import { Field, Form, Formik } from "formik";
 import { logIn } from "../../redux/auth/operations";
 import { toast } from "react-hot-toast";
+import axios from "axios";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
   const handleSubmit = (values, actions) => {
-    console.log("LoginForm values:");
-    console.log(values);
+    console.log("LoginForm values: ", values);
+    console.log(
+      "Current Authorization Header:",
+      axios.defaults.headers.common.Authorization
+    );
     dispatch(logIn(values))
       .unwrap()
       .then(() => {

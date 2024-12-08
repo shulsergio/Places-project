@@ -10,6 +10,7 @@ import { RestrictedRoute } from "./components/RestrictedRoute/RestrictedRoute";
 import { selectIsLoggedIn, selectIsRefreshing } from "./redux/auth/selectors";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 import { refreshUser } from "./redux/auth/operations";
+import { fetchVisits } from "./redux/visits/operations";
 // import VisitsPage from "./pages/VisitsPage";
 
 function App() {
@@ -19,14 +20,23 @@ function App() {
   const VisitsPage = lazy(() => import("./pages/VisitsPage"));
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  console.log("isLoggedIn in App component:", isLoggedIn);
+  const isRefreshing = useSelector(selectIsRefreshing);
+
   const dispatch = useDispatch();
+
   useEffect(() => {
-    if (!isLoggedIn) {
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (!isLoggedIn && refreshToken) {
       dispatch(refreshUser());
     }
   }, [dispatch, isLoggedIn]);
-  const isRefreshing = useSelector(selectIsRefreshing);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(fetchVisits());
+    }
+  }, [dispatch, isLoggedIn]);
+
   return isRefreshing ? (
     <Loader />
   ) : (

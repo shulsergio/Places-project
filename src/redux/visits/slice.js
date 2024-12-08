@@ -13,16 +13,18 @@ const slice = createSlice({
       .addCase(fetchVisits.pending, (state) => {
         state.loading = true;
         state.error = null;
+        console.log("Fetching visits...");
       })
       .addCase(fetchVisits.fulfilled, (state, { payload }) => {
         state.items = payload;
         state.loading = false;
+        console.log("Fetched visits successfully:", payload);
       })
       .addCase(fetchVisits.rejected, (state, { payload }) => {
         state.loading = false;
-        state.error = payload;
+        state.error = payload || "Unknown error";
+        console.log("Error fetching visits:", payload);
         state.items = [];
-        // state.error = action.error.message;
       })
       .addCase(addVisit.pending, (state, { payload }) => {
         state.loading = true;
@@ -55,4 +57,4 @@ const slice = createSlice({
         // state.error = action.error.message;
       }),
 });
-export const contactsReducer = slice.reducer;
+export const visitsReducer = slice.reducer;

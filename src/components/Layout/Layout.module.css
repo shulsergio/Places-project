@@ -1,5 +1,7 @@
 .box {
   max-width: 960px;
+  min-height: 800px;
   margin: 0 auto;
   padding: 0 16px;
+  background-color: white;
 }

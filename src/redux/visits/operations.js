@@ -1,12 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+axios.defaults.baseURL = "https://places-project-db.onrender.com/";
 
 export const fetchVisits = createAsyncThunk(
-  "contacts/fetchAll",
+  "visits/fetchAll",
   async (_, thunkAPI) => {
     try {
       const response = await axios.get("/visits");
-      return response.data;
+      console.log("response in fetchVisits: ", response);
+      console.log("response.data in fetchVisits: ", response.data.data);
+      return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -14,10 +17,10 @@ export const fetchVisits = createAsyncThunk(
 );
 
 export const addVisit = createAsyncThunk(
-  "contacts/addVisit",
-  async (contact, thunkAPI) => {
+  "visits/addVisit",
+  async (visit, thunkAPI) => {
     try {
-      const response = await axios.post("/visits", contact);
+      const response = await axios.post("/visits", visit);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -26,7 +29,7 @@ export const addVisit = createAsyncThunk(
 );
 
 export const deleteVisit = createAsyncThunk(
-  "contacts/deleteVisit",
+  "visits/deleteVisit",
   async (id, thunkAPI) => {
     try {
       const { data } = await axios.delete(`/visits/${id}`);

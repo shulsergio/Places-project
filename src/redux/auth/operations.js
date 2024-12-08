@@ -2,6 +2,7 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = "https://places-project-db.onrender.com/";
+
 const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
@@ -27,11 +28,17 @@ export const logIn = createAsyncThunk(
   async (credential, thunkAPI) => {
     try {
       const { data } = await axios.post("/auth/login", credential);
-      console.log("auth/login (opration.js) - in data:", data);
-      setAuthHeader(data.token);
+      console.log("auth/login (opration.js) - logIn:", data);
+      console.log("data.token (opration.js) - logIn:", data.token);
+      console.log("data.accessToken (opration.js) - logIn:", data.accessToken);
+      console.log(
+        "data.data.accessToken (opration.js) - logIn:",
+        data.data.accessToken
+      );
+      setAuthHeader(data.data.accessToken);
       return {
-        user: data.data.user, // Путь к объекту user
-        token: data.data.accessToken, // Путь к токену
+        user: data.data.user,
+        token: data.data.accessToken,
       };
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -52,16 +59,16 @@ export const refreshUser = createAsyncThunk(
   "auth/refresh",
   async (_, thunkAPI) => {
     const reduxState = thunkAPI.getState();
+    if (!reduxState.auth.token) {
+      throw new Error("No token found");
+    }
     setAuthHeader(reduxState.auth.token);
-    const { data } = await axios.post("/auth/refresh");
-    return data;
-  },
-  {
-    condition: (_, thunkAPI) => {
-      const reduxState = thunkAPI.getState();
-      console.log("reduxState.auth.token != null:::");
-      console.log(reduxState.auth.token != null);
-      return reduxState.auth.token != null;
-    },
+
+    try {
+      const { data } = await axios.post("/auth/refresh");
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
 );
