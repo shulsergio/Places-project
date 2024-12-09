@@ -4,10 +4,10 @@ export default function HomePage() {
   console.log("Rendered HomePage");
   return (
     <>
-      {/* <Helmet>
-        <title>Contacts app</title>
-      </Helmet> */}
-      <h1>Contacts data base</h1>
+      <div className="headBox">
+        <h1>Save your emotions </h1>
+        <h2>Your notebook of visits to different parts of the world</h2>
+      </div>
     </>
   );
 }
