@@ -1,10 +1,21 @@
+import css from "./VisitItem.module.css";
+
 const VisitItem = ({ visit }) => {
   return (
-    <li>
-      <p>{visit.name}</p>
-      <p>{visit.country}</p>
-      <p>{visit.city}</p>
-    </li>
+    <div className={css.item}>
+      <p className={css.textItem}>
+        Location:
+        <span className={css.nameItem}> {visit.name}</span>
+      </p>
+      <p className={css.textItem}>
+        Country:
+        <span className={css.nameItem}> {visit.country}</span>
+      </p>
+      <p className={css.textItem}>
+        City:
+        <span className={css.nameItem}> {visit.city}</span>
+      </p>
+    </div>
   );
 };
 

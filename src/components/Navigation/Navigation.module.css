@@ -5,15 +5,22 @@
 }
 
 .navLink {
-  padding: 10px 5px;
+  min-width: 100px;
+  padding: 8px 12px;
+  text-align: center;
+  outline: none;
+  border: none;
+  background: #9be1a0;
+  border-radius: 16px;
+  transition: color 0.4s ease, background 0.4s ease;
   font-weight: 600;
   font-size: 20px;
   color: black;
-  outline: none;
-  transition: color 0.4s ease;
+  margin-right: 10px;
 }
 .navLink:hover,
 .navLink:active {
   cursor: pointer;
-  color: blue;
+  background: #3ce247;
+  color: rgb(42, 23, 247);
 }

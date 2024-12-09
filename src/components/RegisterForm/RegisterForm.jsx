@@ -58,9 +58,9 @@ export default function RegistrationForm() {
               placeholder="Password"
             />
           </label>
-          <button className={css.button} type="submit">
+          {/* <button className={css.button} type="submit">
             Register
-          </button>
+          </button> */}
         </Form>
       </Formik>
     </div>

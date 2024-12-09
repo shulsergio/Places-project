@@ -13,7 +13,9 @@ const UserMenu = () => {
 
   return (
     <div className={css.box}>
-      <p className={css.textBox}>Hello, {user.name}</p>
+      <p className={css.nameBox}>
+        Hello, <span className={css.nameText}> {user.name}</span>
+      </p>
       <button
         className={css.button}
         onClick={() => {
@@ -21,7 +23,7 @@ const UserMenu = () => {
         }}
         type="button"
       >
-        Logout
+        Log out
       </button>
     </div>
   );

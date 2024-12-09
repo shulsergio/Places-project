@@ -22,7 +22,6 @@ export default function VisitPage() {
     <>
       {loading && <Loader />}
       {error && <p>Err...</p>}
-      <h1>Visits Page</h1>
       <VisitList visits={visits} />
     </>
   );
