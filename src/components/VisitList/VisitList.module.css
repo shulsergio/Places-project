@@ -1,21 +1,19 @@
 .mainBox {
-  padding: 40px 0;
+  padding: 50px 0;
   display: flex;
+  justify-content: center;
   flex-direction: row;
-  gap: 25px;
+  gap: 40px;
 }
 
 .filterBox {
-  min-width: 400px;
+  min-width: 300px;
   height: inherit;
-  border-radius: 16px;
-  border: none;
-  background-color: rgb(190, 255, 182);
+  /* border-radius: 16px;
+  border: 1px solid rgb(190, 255, 182); */
 }
 .visitsBox {
-  padding: 16px 16px;
-  border: 1px solid rgb(190, 255, 182);
-  border-radius: 16px;
+  padding: 0px 16px;
 }
 .list {
   list-style: none;
@@ -33,5 +31,7 @@
   text-align: center;
   font-weight: 700;
   font-size: 24px;
-  color: #1bb025;
+  color: #3b6b52;
+  border: 1px solid rgb(190, 255, 182);
+  border-radius: 16px;
 }
