@@ -28,7 +28,8 @@ export default function LoginForm() {
     <div className={css.box}>
       <h2 className={css.header}>Login</h2>
       <p className={css.text}>
-        login here using your email- sergo.shulga@gmail.com password- 123
+        login here using your email. ThisTemplate for login now = login-
+        user2@gmail.com password- 123
       </p>
       <Formik
         initialValues={{
