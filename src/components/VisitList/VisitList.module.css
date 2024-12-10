@@ -1,14 +1,16 @@
 .mainBox {
-  padding: 50px 0;
+  padding: 30px 8px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: row;
-  gap: 40px;
+  gap: 10px;
 }
 
 .filterBox {
-  min-width: 300px;
-  height: inherit;
+  min-width: 200px;
+  max-width: 400px;
+  max-height: 499px;
+  background-color: #e6f5e9;
   /* border-radius: 16px;
   border: 1px solid rgb(190, 255, 182); */
 }
@@ -20,18 +22,21 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  row-gap: 16px;
-  column-gap: 28px;
+  row-gap: 8px;
+
   flex-wrap: wrap;
   justify-content: center;
   scroll-behavior: smooth;
 }
+
 .visitsHeader {
   padding: 10px;
   text-align: center;
   font-weight: 700;
   font-size: 24px;
   color: #3b6b52;
+}
+.border {
   border: 1px solid rgb(190, 255, 182);
   border-radius: 16px;
 }

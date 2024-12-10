@@ -1,6 +1,6 @@
 import css from "./VisitItem.module.css";
-
-const VisitItem = ({ visit }) => {
+import clsx from "clsx";
+const VisitItem = ({ visit, onDelete }) => {
   function formatDate(date) {
     const months = [
       "Jan",
@@ -22,6 +22,9 @@ const VisitItem = ({ visit }) => {
     const year = newDate.getFullYear();
     return `${day} ${month} ${year}`;
   }
+  // const handleEdit
+
+  // const handleDelete
 
   return (
     <div className={css.card}>
@@ -41,26 +44,27 @@ const VisitItem = ({ visit }) => {
         </p>
         <p></p>
       </div>
+      <div className={css.actions}>
+        <button
+          className={clsx(
+            css.actionButton,
+            css.editButton
+          )} /*onClick={() => handleEdit()}*/
+        >
+          V
+        </button>
+        <button
+          className={clsx(css.actionButton, css.deleteButton)}
+          onClick={() => {
+            console.log("VisitItem visit._id :", visit._id);
+            onDelete(visit._id);
+          }}
+        >
+          X
+        </button>
+      </div>
     </div>
   );
 };
 
-/*
-    <div className={css.item}>
-      <p className={css.textItem}>
-        Location:
-        <span className={css.nameItem}> {visit.name}</span>
-      </p>
-      <p className={css.textItem}>
-        Country:
-        <span className={css.nameItem}> {visit.country}</span>
-      </p>
-      <p className={css.textItem}>
-        City:
-        <span className={css.nameItem}> {visit.city}</span>
-      </p>
-    </div>
-  );
-};
-*/
 export default VisitItem;

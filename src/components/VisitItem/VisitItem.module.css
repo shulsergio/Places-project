@@ -4,15 +4,15 @@
   align-items: flex-start;
   justify-content: space-between;
   max-width: 400px;
-  max-height: 200px;
-  padding: 20px;
+  height: 120px;
+  padding: 20px 22px;
   background: linear-gradient(145deg, #eaf5ea, #cfe7d5);
   border: 2px solid #a8d5ba;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-family: "Arial", sans-serif;
   color: #2f4f4f;
-  margin: 20px auto;
+  margin: 0 auto;
 }
 
 .cardHeader {
@@ -50,4 +50,41 @@
   font-weight: 600;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.actionButton {
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+  font-weight: 500;
+  /* border: 1px solid rgb(190, 255, 182); */
+  border: none;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.editButton {
+  background: #fff;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+.editButton:hover {
+  background: #558c73;
+  transform: scale(1.1);
+}
+
+.deleteButton {
+  background: #fff;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+.deleteButton:hover {
+  background: #c72b2b;
+  transform: scale(1.1);
 }
